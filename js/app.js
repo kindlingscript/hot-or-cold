@@ -8,7 +8,8 @@ function getMagicNumber(min, max) {
 }
 
 /* Function to find difference between user input and magic number. See how close or far away they are from guessing right. */
-var guessedNums = []; // Global variable
+var guessedNums = []; // Global variables
+var lastGuess;
 function getDiff(input, magicNumber) {
   // See if input has already been entered.
   for (var i = 0; i < guessedNums.length; i++) {
@@ -18,32 +19,74 @@ function getDiff(input, magicNumber) {
   }
   guessedNums.push(input);
 
-  // Variables to get difference.
-  var smallerNum = Math.min(input, magicNumber);
-  var largerNum = Math.max(input, magicNumber);
-  var diff = largerNum - smallerNum;
-
-  // Check for valid input.
   if (input <= 1 || input >= 100) {
     $("#feedback").html("Please enter a number between 1 and 100.");
-  } else { // Give feedback on guess.
+  } else {
+    // Variables to get difference between current input and magicNum.
+    var smallerNum = Math.min(input, magicNumber);
+    var largerNum = Math.max(input, magicNumber);
+    var diff = largerNum - smallerNum;
+
+    // Variables to get diff between the last guessed number and magicNum.
+    var lastGuessSmallerNum = Math.min(lastGuess, magicNumber);
+    var lastGuessLargerNum = Math.max(lastGuess, magicNumber);
+    var lastGuessDiff = lastGuessLargerNum - lastGuessSmallerNum;
+
+   // Give feedback on guess.
     if (diff == 0) {
       $("#feedback").html("Sizzling! You got it!");
     } else if (diff >= 1 && diff < 10) { 
-      $("#feedback").html("HOT! You're closing in!");
+      if (diff < lastGuessDiff) {
+        $("#feedback").html("HOT! You're closing in! Your guess is closer now.");
+      } else if (diff > lastGuessDiff) {
+        $("#feedback").html("HOT! You're closing in! Your guess was closer before.");
+      } else {
+        $("#feedback").html("HOT! You're closing in!");
+      }
     } else if (diff >= 10 && diff < 20) {
-      $("#feedback").html("Burner's on, getting hot!");
+      if (diff < lastGuessDiff) {
+        $("#feedback").html("Burner's on, getting hot! Your guess is closer now.");
+      } else if (diff > lastGuessDiff) {
+        $("#feedback").html("Burner's on, getting hot! Your guess was closer before.");
+      } else {
+        $("#feedback").html("Burner's on, getting hot!");
+      }
     } else if (diff >= 20 && diff < 30) {
-      $("#feedback").html("Getting warmer!");
+      if (diff < lastGuessDiff) { 
+        $("#feedback").html("Getting warmer! Your guess is closer now.");
+      } else if (diff > lastGuessDiff) {
+        $("#feedback").html("Getting warmer! Your guess was closer before.");
+      } else {
+        $("#feedback").html("Getting warmer!");
+      }
     } else if (diff >= 30 && diff < 40) {
-      $("#feedback").html("Slowly warming...");
+      if (diff < lastGuessDiff) {
+        $("#feedback").html("Slowly warming... your guess is closer now!");
+      } else if (diff > lastGuessDiff) {
+        $("#feedback").html("Slowly warming... your guess was closer before.");
+      } else {
+        $("#feedback").html("Slowly warming...");
+      }
     } else if (diff >= 40 && diff < 50) {
-      $("#feedback").html("Still s-sh-shivering.");
+      if (diff < lastGuessDiff) {
+        $("#feedback").html("Still s-sh-shivering. Your guess is closer now.");
+      } else if (diff > lastGuessDiff) {
+        $("#feedback").html("Still s-sh-shivering. Your guess was closer before.");
+      } else {
+        $("#feedback").html("Still s-sh-shivering.");
+      }
     } else if (diff >= 50) {
-      $("#feedback").html("Freezing cold!");
+      if (diff < lastGuessDiff) {
+        $("#feedback").html("Freezing cold! Your guess is closer now.");
+      } else if (diff > lastGuessDiff) {
+        $("#feedback").html("Freezing cold! Your guess was closer before.");
+      } else {
+        $("#feedback").html("Freezing cold!");
+      }
     }
-  }
+  };
   $("#userGuess").val("").focus();
+  lastGuess = input;
 };
 
 /* If there is a difference between user guess and magic number, then log their guess in #guessList and increment guess count (#count) by 1. */
@@ -68,6 +111,9 @@ function newGame() {
   counter = 0;
   $("#guessList").html("");
   $("#feedback").html("Make your guess!");
+  guessedNums = [];
+  magicNumber = getMagicNumber(1, 100);
+  input = '';
 };
 
 $(document).ready(function(){
