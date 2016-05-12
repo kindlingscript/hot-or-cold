@@ -7,14 +7,26 @@ function getMagicNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// Function to find difference between user input and magic number.
-// See how close or far away they are from guessing right.
+/* Function to find difference between user input and magic number. See how close or far away they are from guessing right. */
+var guessedNums = []; // Global variable
 function getDiff(input, magicNumber) {
-  // Check for valid input first.
+  // See if input has already been entered.
+  for (var i = 0; i < guessedNums.length; i++) {
+    if (input == guessedNums[i]) {
+      alert("You've already guessed that number. Try another!");
+    }
+  }
+  guessedNums.push(input);
+
+  // Variables to get difference.
+  var smallerNum = Math.min(input, magicNumber);
+  var largerNum = Math.max(input, magicNumber);
+  var diff = largerNum - smallerNum;
+
+  // Check for valid input.
   if (input <= 1 || input >= 100) {
     $("#feedback").html("Please enter a number between 1 and 100.");
-  } else {
-    var diff = input - magicNumber;
+  } else { // Give feedback on guess.
     if (diff == 0) {
       $("#feedback").html("Sizzling! You got it!");
     } else if (diff >= 1 && diff < 10) { 
@@ -32,29 +44,31 @@ function getDiff(input, magicNumber) {
     }
   }
   $("#userGuess").val("").focus();
-}
+};
 
 /* If there is a difference between user guess and magic number, then log their guess in #guessList and increment guess count (#count) by 1. */
 function logGuesses(input, magicNumber) {
-  if (input != magicNumber) {
+  if (input != magicNumber && (input >= 1 && input <= 100)) {
     $("#guessList").append("<li>" + input + "</li>");
   }
-}
+};
 
 // Every time the user submits input, increment guess count until they get the magicNumber.
 var counter = 0;
 function incrementGuessCount(input, magicNumber) {
-  if (input != magicNumber) {
+  if (input != magicNumber && (input >= 1 && input <= 100)) {
     counter++;
     $("#count").html("<span>" + counter + "</span>");
   }
-}
+};
 
 // Render new game when user click on "+ New Game" link.
-// Will need to reset html to original, clear everything.
-// function newGame() {
-//   var magicNumber = getMagicNumber(1, 100);
-// }
+function newGame() {
+  $("#count").html("<span>" + 0 + "</span>");
+  counter = 0;
+  $("#guessList").html("");
+  $("#feedback").html("Make your guess!");
+};
 
 $(document).ready(function(){
   var magicNumber = getMagicNumber(1, 100);
@@ -80,5 +94,9 @@ $(document).ready(function(){
       logGuesses(input, magicNumber);
       incrementGuessCount(input, magicNumber);
     }
-  })
+  });
+
+  $("a.new").click(function() {
+    newGame();
+  });
 });
