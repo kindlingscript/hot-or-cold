@@ -134,7 +134,6 @@ $(document).ready(function(){
     $("#userGuess").val("").focus();
   });
 
-
   // Render new game
   $(".new").click(function() {
     $("#count").html("<span>0</span>");
