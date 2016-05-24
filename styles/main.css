@@ -1,5 +1,6 @@
 body {
   color: #3F423F;
+  font-family: 'cooper_hewittmedium', sans-serif;
 }
 
 h1 {
@@ -8,6 +9,20 @@ h1 {
 
 h2 {
   font-family: 'cooper_hewittsemibold', sans-serif;
+}
+
+.new {
+  float: right;
+  margin: 1.5em 1.5em 0 0;
+  text-decoration: none;
+  color: #3F423F;
+  padding: 0.5em;
+}
+
+.new:hover {
+  color: #FC4349;
+  border: 1px #FC4349 solid;
+  border-radius: 3px;
 }
 
 .hot {
@@ -19,7 +34,7 @@ h2 {
   color: #406392;
 }
 
-.game {
+.main-box {
   background-color: rgba(202, 202, 202, 0.25);
   border-radius: 1.5em;
   width: 35em;
@@ -33,9 +48,14 @@ p {
 }
 
 .title {
+  clear: right;
   text-align: center;
   font-size: 3em;
-  margin-top: 2.5em;
+  padding-top: 2.5em;
+}
+
+.game {
+  padding-top: 1em;
 }
 
 #feedback {
@@ -71,6 +91,45 @@ input#userGuess {
 .container {
   margin: 10px;
   padding-right: 3.2em;
+}
+
+.previousGuesses {
+  background-color: #D8D8D8;
+  min-height: 50px;
+  border-bottom-left-radius: 1.2em;
+  border-bottom-right-radius: 1.2em;
+  margin-top: 30px;
+  padding-bottom: 15px;
+}
+
+.previousGuesses > h4 {
+  padding-left: 15px;
+  display: inline-block;
+}
+
+.previousGuesses ul {
+  margin: 0;
+  display: inline;
+  padding: 0;
+}
+
+.previousGuesses li {
+  list-style: none;
+  display: inline-block;
+  padding-right: 0.5em;
+  background-color: #4087DA;
+  color: white;
+  padding: 5px 5px;
+  margin: 0 0.5em;
+  border-radius: 3px;
+}
+
+.guessCount {
+  display: inline-block;
+  background-color: white;
+  margin-left: 4em;
+  padding: 5px 20px;
+  border-radius: 45%;
 }
 
 img {

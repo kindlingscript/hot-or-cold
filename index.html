@@ -16,32 +16,36 @@
 
 			<!-- Top Navigation -->
 			<nav> 
-				<ul class="clearfix">
-					<li><a class="new" href="#">+ New Game</a></li>
-				</ul>
+				<a class="new" href="#">NEW GAME</a>
 			</nav>	
 
 			<!-- logo text -->
 			<h1 class="title"><span class="hot">HOT</span> or <span class="cold">COLD</span>?</h1>
 
 		</header>
-
-		<section class="game"> <!-- Guessing Section -->
-			<div class="container">
-				<h2 id="feedback">The number is...</h2>
-				<form id="grabInput">
-					<input type="text" name="userGuess" id="userGuess" class="text" maxlength="3" autocomplete="off" placeholder="enter a number" required/>
-	      	<input type="submit" id="guessButton" class="button" name="submit" value="GUESS"/>
-				</form>
-			</div>
-			<div class="container">
-				<div id="hot-or-cold">
-					<img src="images/hot.svg">
+		<section class="main-box">
+			<section class="game"> <!-- Guessing Section -->
+				<div class="container">
+					<h2 id="feedback">The number is...</h2>
+					<form id="grabInput">
+						<input type="text" name="userGuess" id="userGuess" class="text" maxlength="3" autocomplete="off" placeholder="enter a number" required/>
+		      	<input type="submit" id="guessButton" class="button" name="submit" value="GUESS"/>
+					</form>
 				</div>
+				<div class="container">
+					<div id="hot-or-cold">
+						<img src="images/hot.svg">
+					</div>
+				</div>
+			</section>
+			<section class="guessCount">
 	      <p>Guess #<span id="count">0</span>!</p>
+	    </section>
+	    <section class="previousGuesses">
+	    	<h4>previously guessed:</h4>
 				<ul id="guessList" class="guessBox clearfix">
 				</ul>
-			</div>
+			</section>
 		</section>
 		<!-- JavaScript -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
