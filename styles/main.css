@@ -26,12 +26,20 @@ h2 {
 }
 
 .hot {
-  color: #FC4349;
+  color: #E16161;
 }
 
 .cold {
  /* color: #2C3E50;*/
-  color: #406392;
+  color: #4087DA;
+}
+
+.hot-icon {
+  display: none;
+}
+
+.cold-icon {
+  display: none;
 }
 
 .main-box {
@@ -76,7 +84,7 @@ input#userGuess {
 }
 
 #guessButton {
-  background-color: #FC4349;
+  background-color: #E16161;
   border: none;
   padding: 5px 12px;
   color: #fff;
@@ -86,11 +94,12 @@ input#userGuess {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-right: 3em;
+  padding-bottom: 2.3em;
 }
 
 .container {
-  margin: 10px;
-  padding-right: 3.2em;
+  padding-right: 3em;
 }
 
 .previousGuesses {
@@ -125,11 +134,32 @@ input#userGuess {
 }
 
 .guessCount {
+  display: flex;
+}
+
+.bubble-1, .bubble-2 {
+  background-color: #fff;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+}
+
+.bubble-1 {
+  margin-left: 5%;
+  margin-top: 55px;
+}
+
+.bubble-2 {
+  margin-left: 1%;
+  margin-top: 43px;
+  margin-right: 1%;
+}
+
+.countNumber {
   display: inline-block;
   background-color: white;
-  margin-left: 4em;
-  padding: 5px 20px;
-  border-radius: 45%;
+  padding: 10px 20px;
+  border-radius: 50%;
 }
 
 img {

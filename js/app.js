@@ -9,6 +9,34 @@ function getMagicNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+function checkGuess() {
+  var input = $("#userGuess").val();
+
+  if (input == "") {
+      alert("Please enter a number first.");
+      return;
+    };
+
+  for (var i = 0; i < guessedNums.length; i++) {
+    if (input === guessedNums[i] && guessedNums != null) {
+      $("#feedback").html("You've already guessed that number. Try another!");
+      return;
+    };
+  };
+
+  if (isNaN(input)) {
+    $("#feedback").html("Please only enter numbers.");
+    return;
+  };
+
+  if (input < 1 || input > 100) {
+    $("#feedback").html("Please enter a number between 1 and 100.");
+    return;
+  };
+
+  
+}
+
 $(document).ready(function(){
   /*--- Display information modal box ---*/
 	$(".what").click(function(){
@@ -23,6 +51,7 @@ $(document).ready(function(){
   // Runs & gives feedback when user clicks / presses Enter on "Guess" button
   $("#guessButton").click(function(e) {
     e.preventDefault();
+    checkGuess();
     
     var input = $("#userGuess").val();
     
@@ -70,6 +99,10 @@ $(document).ready(function(){
     var lastGuessSmallerNum = Math.min(lastGuess, magicNumber);
     var lastGuessLargerNum = Math.max(lastGuess, magicNumber)
     var lastGuessDiff = lastGuessLargerNum - lastGuessSmallerNum;
+
+    // function fire() {
+    //   return $("hot-or-cold").css("background-image", "url(../images/fire.png)");
+    // };
 
     // Show feedback on guess to user
     if (diff == 0) {
@@ -122,6 +155,15 @@ $(document).ready(function(){
       } else {
         $("#feedback").html("Freezing cold!");
       }
+    };
+
+    // Change icons dependent on how close guess is to magicNumber
+    if (diff >= 0 && diff < 30) {
+      $('.cold-icon').hide();
+      $('.hot-icon').show();
+    } else if (diff >= 30) {
+      $('.hot-icon').hide();
+      $('.cold-icon').show();
     };
 
     // Increment the counter
